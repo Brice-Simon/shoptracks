@@ -1,0 +1,17 @@
+$kind: http-request
+description: Returns a single item by SKU — simulates QR code scan
+url: "{{base_url}}/api/items/{{item_id}}"
+method: GET
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status code is 200', function () {
+        pm.response.to.have.status(200);
+      });
+      pm.test('Returns correct item', function () {
+        const json = pm.response.json();
+        pm.expect(json.success).to.be.true;
+        pm.expect(json.data.id).to.equal(pm.collectionVariables.get('item_id'));
+      });
+    language: text/javascript
+order: 2000

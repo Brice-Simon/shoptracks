@@ -1,0 +1,25 @@
+$kind: http-request
+description: Should return 400 when required fields are missing
+url: "{{base_url}}/api/items"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "name": "Incomplete Item"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status code is 400', function () {
+        pm.response.to.have.status(400);
+      });
+      pm.test('Returns validation error', function () {
+        const json = pm.response.json();
+        pm.expect(json.success).to.be.false;
+        pm.expect(json.error).to.be.a('string');
+      });
+    language: text/javascript
+order: 5000

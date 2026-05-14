@@ -1,0 +1,31 @@
+$kind: http-request
+description: Creates a new item and returns it with a generated SKU
+url: "{{base_url}}/api/items"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "name": "Sprite 500ml",
+      "price": 500,
+      "category": "Beverages",
+      "quantity": 20
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status code is 201', function () {
+        pm.response.to.have.status(201);
+      });
+      pm.test('Item created with generated SKU', function () {
+        const json = pm.response.json();
+        pm.expect(json.success).to.be.true;
+        pm.expect(json.data).to.have.property('id');
+        pm.expect(json.data.name).to.equal('Sprite 500ml');
+        pm.expect(json.data.price).to.equal(500);
+        pm.collectionVariables.set('item_id', json.data.id);
+      });
+    language: text/javascript
+order: 4000

@@ -1,0 +1,6 @@
+$kind: collection
+description: QR-based Asset Tracking and POS System — API Test Collection
+variables:
+  base_url: http://localhost:5000
+  item_id: SKU001
+  sale_id: ""

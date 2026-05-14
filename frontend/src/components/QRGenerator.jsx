@@ -23,19 +23,19 @@ const styles = {
         alignItems: 'center',
         gap: '6px',
         padding: '16px',
-        backgroundColor: '#ffffff',
-        border: '1px solid #e5e7eb',
+        backgroundColor: '#1e293b',
+        border: '1px solid #334155',
         borderRadius: '12px',
     },
     qrBox: {
         padding: '12px',
-        border: '1px solid #e5e7eb',
+        border: '1px solid #334155',
         borderRadius: '8px',
         backgroundColor: '#ffffff',
     },
-    sku: { fontSize: '11px', color: '#9ca3af', margin: 0 },
-    name: { fontSize: '14px', fontWeight: '600', color: '#111827', margin: 0 },
-    price: { fontSize: '13px', color: '#1d4ed8', margin: 0 },
+    sku: { fontSize: '11px', color: '#94a3b8', margin: 0 },
+    name: { fontSize: '14px', fontWeight: '600', color: '#f8fafc', margin: 0 },
+    price: { fontSize: '13px', color: '#60a5fa', margin: 0 },
 };
 
 export default QRGenerator;

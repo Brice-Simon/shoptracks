@@ -1,6 +1,12 @@
+/**
+ * ITEMS ROUTER (items.routes.js)
+ * Defines the URL paths for all inventory-related operations.
+ * This file maps "What the user wants to do" (URL) to "Which code should run" (Controller).
+ */
+
 const express = require('express');
 const router = express.Router();
-const auth = require('../middleware/auth');
+const auth = require('../middleware/auth'); // Middleware to check if the user is logged in
 const {
     getAllItems,
     getItemById,
@@ -11,37 +17,39 @@ const {
 
 /**
  * @route   GET /api/items
- * @desc    Get all inventory items
- * @access  Public
+ * @desc    Retrieves the full list of products.
+ * @access  Public (Anyone can view the inventory)
  */
 router.get('/', getAllItems);
 
 /**
  * @route   GET /api/items/:id
- * @desc    Get single item by SKU — called when QR code is scanned
+ * @desc    Retrieves a single product. 
+ *          This is the endpoint triggered when a mobile app scans a QR code.
  * @access  Public
  */
 router.get('/:id', getItemById);
 
 /**
  * @route   POST /api/items
- * @desc    Add a new item to inventory
- * @access  Protected
+ * @desc    Adds a new product.
+ * @access  Protected (Requires 'auth' middleware to pass)
  */
 router.post('/', auth, createItem);
 
 /**
  * @route   PUT /api/items/:id
- * @desc    Update an existing item
+ * @desc    Updates details (price, stock, name) of an existing product.
  * @access  Protected
  */
 router.put('/:id', auth, updateItem);
 
 /**
  * @route   DELETE /api/items/:id
- * @desc    Remove an item from inventory
+ * @desc    Permanently removes a product from the database.
  * @access  Protected
  */
 router.delete('/:id', auth, deleteItem);
 
+// Export the router to be mounted in the main server.js file
 module.exports = router;

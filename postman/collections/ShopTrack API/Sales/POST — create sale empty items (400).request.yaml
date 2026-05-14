@@ -1,0 +1,24 @@
+$kind: http-request
+description: Should return 400 when items array is empty
+url: "{{base_url}}/api/sales"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "items": []
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status code is 400', function () {
+        pm.response.to.have.status(400);
+      });
+      pm.test('Returns validation error', function () {
+        const json = pm.response.json();
+        pm.expect(json.success).to.be.false;
+      });
+    language: text/javascript
+order: 2000

@@ -1,0 +1,17 @@
+$kind: http-request
+description: Returns a base64 QR code image for the given SKU
+url: "{{base_url}}/api/qr/SKU001"
+method: GET
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status code is 200', function () {
+        pm.response.to.have.status(200);
+      });
+      pm.test('Returns QR code data URL', function () {
+        const json = pm.response.json();
+        pm.expect(json.success).to.be.true;
+        pm.expect(json.data.qr_code).to.include('data:image/png;base64');
+      });
+    language: text/javascript
+order: 1000

@@ -1,0 +1,27 @@
+$kind: http-request
+description: Returns all inventory items
+url: "{{base_url}}/api/items"
+method: GET
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status code is 200', function () {
+        pm.response.to.have.status(200);
+      });
+      pm.test('Returns array of items', function () {
+        const json = pm.response.json();
+        pm.expect(json.success).to.be.true;
+        pm.expect(json.data).to.be.an('array');
+      });
+      pm.test('Items have required fields', function () {
+        const json = pm.response.json();
+        if (json.data.length > 0) {
+          const item = json.data[0];
+          pm.expect(item).to.have.property('id');
+          pm.expect(item).to.have.property('name');
+          pm.expect(item).to.have.property('price');
+          pm.expect(item).to.have.property('quantity');
+        }
+      });
+    language: text/javascript
+order: 1000

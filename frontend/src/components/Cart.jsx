@@ -55,28 +55,28 @@ const Cart = ({ onCheckout }) => {
 
 const styles = {
     container: {
-        backgroundColor: '#ffffff',
-        border: '1px solid #e5e7eb',
+        backgroundColor: '#1e293b', // Darker slate
+        border: '1px solid #334155', // Subtle dark border
         borderRadius: '12px',
         overflow: 'hidden',
     },
     empty: {
         padding: '24px',
         textAlign: 'center',
-        color: '#9ca3af',
+        color: '#94a3b8', // Muted text
         fontSize: '13px',
-        backgroundColor: '#ffffff',
-        border: '1px solid #e5e7eb',
+        backgroundColor: '#1e293b', // Matches container
+        border: '1px solid #334155',
         borderRadius: '12px',
     },
     title: {
         fontSize: '13px',
         fontWeight: '600',
-        color: '#6b7280',
+        color: '#94a3b8', 
         textTransform: 'uppercase',
         letterSpacing: '0.05em',
         padding: '12px 16px',
-        borderBottom: '1px solid #e5e7eb',
+        borderBottom: '1px solid #334155',
         margin: 0,
     },
     items: { padding: '8px 0' },
@@ -85,35 +85,35 @@ const styles = {
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: '8px 16px',
-        borderBottom: '1px solid #f3f4f6',
+        borderBottom: '1px solid #334155', // Darker separator
     },
     itemInfo: { flex: 1 },
-    itemName: { fontSize: '14px', fontWeight: '500', margin: 0, color: '#111827' },
-    itemMeta: { fontSize: '12px', color: '#6b7280', margin: 0 },
+    itemName: { fontSize: '14px', fontWeight: '500', margin: 0, color: '#f8fafc' },
+    itemMeta: { fontSize: '12px', color: '#94a3b8', margin: 0 },
     itemRight: { display: 'flex', alignItems: 'center', gap: '12px' },
-    itemTotal: { fontSize: '14px', fontWeight: '500', margin: 0, color: '#111827' },
+    itemTotal: { fontSize: '14px', fontWeight: '500', margin: 0, color: '#f8fafc' },
     removeBtn: {
         background: 'none',
         border: 'none',
         cursor: 'pointer',
-        color: '#ef4444',
+        color: '#f87171', // Softer red for dark mode
         fontSize: '14px',
         padding: '2px 6px',
         display: 'flex',
         alignItems: 'center',
     },
-    footer: { padding: '12px 16px', borderTop: '1px solid #e5e7eb' },
+    footer: { padding: '12px 16px', borderTop: '1px solid #334155' },
     totalRow: {
         display: 'flex',
         justifyContent: 'space-between',
         marginBottom: '12px',
     },
-    totalLabel: { fontSize: '15px', fontWeight: '600', color: '#111827' },
-    totalValue: { fontSize: '15px', fontWeight: '600', color: '#111827' },
+    totalLabel: { fontSize: '15px', fontWeight: '600', color: '#f8fafc' },
+    totalValue: { fontSize: '15px', fontWeight: '600', color: '#60a5fa' }, // Blue accent
     checkoutBtn: {
         width: '100%',
         padding: '10px',
-        backgroundColor: '#1d4ed8',
+        backgroundColor: '#3b82f6', // Brighter blue for dark background
         color: '#ffffff',
         border: 'none',
         borderRadius: '8px',

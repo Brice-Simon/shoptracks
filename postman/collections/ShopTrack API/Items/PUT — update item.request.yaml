@@ -1,0 +1,29 @@
+$kind: http-request
+description: Updates an existing item
+url: "{{base_url}}/api/items/{{item_id}}"
+method: PUT
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "name": "Sprite 500ml Updated",
+      "price": 600,
+      "category": "Beverages",
+      "quantity": 50
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status code is 200', function () {
+        pm.response.to.have.status(200);
+      });
+      pm.test('Item updated successfully', function () {
+        const json = pm.response.json();
+        pm.expect(json.success).to.be.true;
+        pm.expect(json.data.price).to.equal(600);
+        pm.expect(json.data.quantity).to.equal(50);
+      });
+    language: text/javascript
+order: 6000

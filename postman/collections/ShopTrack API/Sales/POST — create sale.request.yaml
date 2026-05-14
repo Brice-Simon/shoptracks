@@ -1,0 +1,43 @@
+$kind: http-request
+description: Records a completed sale and decrements stock
+url: "{{base_url}}/api/sales"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "items": [
+        {
+          "item_id": "SKU001",
+          "item_name": "Fanta 500ml",
+          "price": 500,
+          "quantity": 2,
+          "subtotal": 1000
+        },
+        {
+          "item_id": "SKU002",
+          "item_name": "Coca-Cola 500ml",
+          "price": 500,
+          "quantity": 1,
+          "subtotal": 500
+        }
+      ]
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status code is 201', function () {
+        pm.response.to.have.status(201);
+      });
+      pm.test('Sale created with transaction ID', function () {
+        const json = pm.response.json();
+        pm.expect(json.success).to.be.true;
+        pm.expect(json.data).to.have.property('id');
+        pm.expect(json.data.total).to.equal(1500);
+        pm.expect(json.data.items).to.have.lengthOf(2);
+        pm.collectionVariables.set('sale_id', json.data.id);
+      });
+    language: text/javascript
+order: 1000
