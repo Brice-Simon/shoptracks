@@ -1,0 +1,25 @@
+@startuml
+left to right direction
+actor "Staff / Cashier" as user
+
+rectangle "ShopTrack POS System" {
+  usecase "View Dashboard" as UC1
+  usecase "Manage Inventory" as UC2
+  usecase "Add New Item" as UC3
+  usecase "Generate & Print QR" as UC4
+  usecase "Scan QR Code" as UC5
+  usecase "Process Sale (Checkout)" as UC6
+  usecase "View Sales Log" as UC7
+}
+
+user --> UC1
+user --> UC2
+user --> UC3
+user --> UC4
+user --> UC5
+user --> UC6
+user --> UC7
+
+UC3 ..> UC4 : <<includes>>
+UC5 ..> UC6 : <<precedes>>
+@enduml

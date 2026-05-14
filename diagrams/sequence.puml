@@ -1,0 +1,23 @@
+@startuml
+actor Cashier
+participant "React Frontend" as FE
+participant "Express API" as API
+database "PostgreSQL" as DB
+
+Cashier -> FE : Scans QR Code
+FE -> API : GET /api/items/{id}
+API -> DB : SELECT * FROM items WHERE id = {id}
+DB --> API : Item Data
+API --> FE : 200 OK (Item Details)
+
+Cashier -> FE : Clicks "Checkout"
+FE -> API : POST /api/sales (Cart Data)
+API -> DB : Validate Stock (SELECT)
+DB --> API : Stock Available
+API -> DB : INSERT INTO sales
+API -> DB : INSERT INTO sale_items
+API -> DB : UPDATE items (Decrement Stock)
+DB --> API : Transaction Success
+API --> FE : 201 Created (Receipt Data)
+FE --> Cashier : Displays Receipt
+@enduml

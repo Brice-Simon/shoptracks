@@ -1,0 +1,28 @@
+@startuml
+class Item {
+  + String id (SKU)
+  + String name
+  + String category
+  + Decimal price
+  + Integer quantity
+  + Datetime created_at
+}
+
+class Sale {
+  + String id
+  + Decimal total_amount
+  + Datetime created_at
+}
+
+class SaleItem {
+  + String sale_id
+  + String item_id
+  + String item_name
+  + Decimal price
+  + Integer quantity
+  + Decimal subtotal
+}
+
+Sale "1" *-- "1..*" SaleItem : contains >
+Item "1" -- "0..*" SaleItem : referenced by >
+@enduml

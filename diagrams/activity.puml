@@ -1,0 +1,21 @@
+@startuml
+start
+:Open Scan & Sell Page;
+:Click "Start Camera Scanner";
+:Scan QR Code;
+if (Item exists in DB?) then (yes)
+  :Add Item to Cart;
+  :Adjust Quantity;
+  :Click "Checkout";
+  if (Sufficient Stock?) then (yes)
+    :Decrement Stock;
+    :Record Sale in DB;
+    :Display Receipt;
+  else (no)
+    :Show Error Message;
+  endif
+else (no)
+  :Show Item Not Found Error;
+endif
+stop
+@enduml

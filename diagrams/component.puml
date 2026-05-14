@@ -1,0 +1,26 @@
+@startuml
+node "Client Browser" {
+  [React Single Page App] as React
+}
+
+node "Docker Container: Frontend" {
+  [Nginx Web Server] as Nginx
+}
+
+node "Docker Container: Backend" {
+  [Express REST API] as API
+  [Item Controller] as IC
+  [Sale Controller] as SC
+  API --> IC
+  API --> SC
+}
+
+node "Docker Container: Database" {
+  database "PostgreSQL" as Postgres
+}
+
+React <--> Nginx : HTTP/HTTPS
+Nginx <--> API : Proxy (/api/*)
+IC <--> Postgres : Read/Write Items
+SC <--> Postgres : Read/Write Sales
+@enduml
